@@ -24,18 +24,16 @@ spec:
         - name: KONG_PROXY_LISTEN
           value: {{ .Values.kong.proxyListen | quote }}
         resources:
-          {{ toYaml .Values.resources}}
+          {{ toYaml .Values.resources | indent 8 }}
         livenessProbe:
-          {{ toYaml .Values.probes.liveness}}
+          {{ toYaml .Values.probes.liveness | indent 8 }}
         readinessProbe:
-          {{ toYaml .Values.probes.readiness}}
+          {{ toYaml .Values.probes.readiness | indent 8 }}
+        volumeMounts:
+        - name: config
+          mountPath: /kong
+        - name: tls
+          mountPath: /etc/kong/tls
         ports:
         - containerPort: 8000
         - containerPort: 8443
-      volumes:
-      - name: config
-        configMap:
-          name: kong-config
-      - name: tls
-        secret:
-          secretName: kong-tls
