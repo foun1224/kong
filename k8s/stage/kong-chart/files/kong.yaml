@@ -1,10 +1,10 @@
 _format_version: "3.0"
 services:
 - name: argocd-service
-  url: https://argocd-server.argocd.svc.cluster.local:443  # Argo CD 內部 HTTPS
+  url: https://argocd-server.argocd.svc.cluster.local:443
   routes:
   - name: argocd-route
     paths:
     - /argocd
     strip_path: true
-    protocols: ["http", "https"]  # 同時支持 HTTP 和 HTTPS
+    protocols: ["http", "https"]

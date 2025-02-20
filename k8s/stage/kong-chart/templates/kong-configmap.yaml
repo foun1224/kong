@@ -5,4 +5,4 @@ metadata:
   namespace: {{ .Values.namespace }}
 data:
   kong.yaml: |-
-    {{ .Files.Get "files/kong.yaml" | indent 4 }}
+    {{ .Files.Get "files/kong.yaml" | indent 2 }}
