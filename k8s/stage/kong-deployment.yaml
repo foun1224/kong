@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong
+  namespace: stage-kong
+spec:
+  replicas: 3  # 多副本支持
+  selector:
+    matchLabels:
+      app: kong
+  template:
+    metadata:
+      labels:
+        app: kong
+    spec:
+      containers:
+      - name: kong
+        image: kong:latest  # 硬編碼鏡像，無需 Helm 模板
+        env:
+        - name: KONG_DATABASE
+          value: "off"  # DB-less 模式
+        - name: KONG_DECLARATIVE_CONFIG
+          value: "/kong/kong.yaml"
+        - name: KONG_PROXY_LISTEN
+          value: "0.0.0.0:8000, 0.0.0.0:8443 ssl"  # 支持 HTTP 和 HTTPS
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /status
+            port: 8001
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /status
+            port: 8001
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /kong
+        - name: tls
+          mountPath: /etc/kong/tls
+        ports:
+        - containerPort: 8000  # HTTP
+        - containerPort: 8443  # HTTPS
+      volumes:
+      - name: config
+        configMap:
+          name: kong-config
+      - name: tls
+        secret:
+          secretName: kong-tls

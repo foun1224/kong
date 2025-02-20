@@ -1,6 +1,0 @@
-apiVersion: v2
-name: kong
-description: Kong API Gateway Helm Chart with DB-less mode
-type: application
-version: 0.1.0
-appVersion: "latest"
