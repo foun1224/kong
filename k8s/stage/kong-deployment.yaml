@@ -56,6 +56,6 @@ spec:
       - name: config
         configMap:
           name: kong-config
-      - name: tls
-        secret:
-          secretName: kong-tls
+      # - name: tls
+      #   secret:
+      #     secretName: kong-tls
