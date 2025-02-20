@@ -1,5 +1,5 @@
 image:
-  repository: kong
+  repository: kong:latest
   tag: latest
 
 namespace: stage-kong

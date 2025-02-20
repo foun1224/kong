@@ -24,11 +24,11 @@ spec:
         - name: KONG_PROXY_LISTEN
           value: {{ .Values.kong.proxyListen | quote }}
         resources:
-          {{ toYaml .Values.resources | indent 10 }}
+          {{ toYaml .Values.resources}}
         livenessProbe:
-          {{ toYaml .Values.probes.liveness | indent 10 }}
+          {{ toYaml .Values.probes.liveness}}
         readinessProbe:
-          {{ toYaml .Values.probes.readiness | indent 10 }}
+          {{ toYaml .Values.probes.readiness}}
         volumeMounts:
         - name: config
           mountPath: /kong
