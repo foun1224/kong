@@ -18,14 +18,17 @@ spec:
         image: {{ .Values.image.repository }}
         env:
         - name: KONG_DATABASE
-          value: {{ .Values.kong.database }}
+          value: {{ .Values.kong.database | quote }}
         - name: KONG_DECLARATIVE_CONFIG
-          value: {{ .Values.kong.declarativeConfig }}
+          value: {{ .Values.kong.declarativeConfig | quote }}
         - name: KONG_PROXY_LISTEN
-          value: {{ .Values.kong.proxyListen }}
-        resources: {{ toYaml .Values.resources | indent 4 }}
-        livenessProbe: {{ toYaml .Values.probes.liveness | indent 4 }}
-        readinessProbe: {{ toYaml .Values.probes.readiness | indent 4 }}
+          value: {{ .Values.kong.proxyListen | quote }}
+        resources:
+          {{ toYaml .Values.resources | indent 10 }}
+        livenessProbe:
+          {{ toYaml .Values.probes.liveness | indent 10 }}
+        readinessProbe:
+          {{ toYaml .Values.probes.readiness | indent 10 }}
         volumeMounts:
         - name: config
           mountPath: /kong
@@ -40,4 +43,4 @@ spec:
           name: kong-config
       - name: tls
         secret:
-          secretName: kong-tls  # 假設已創建
+          secretName: kong-tls
