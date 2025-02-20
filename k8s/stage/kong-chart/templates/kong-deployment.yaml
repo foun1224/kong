@@ -28,10 +28,10 @@ spec:
         livenessProbe:
           {{ toYaml .Values.probes.liveness | indent 8 }}
         readinessProbe:
-          {{ toYaml .Values.probes.readiness | indent 8 }}
-        volumeMounts:
-        - name: config
-          mountPath: /kong
+          {{ toYaml .Values.probes.readiness}}
+        volumeMounts:  # 第 32 行，縮進 6 個空格
+        # - name: config  # 第 33 行，縮進 8 個空格
+        #   mountPath: /kong  # 第 34 行，縮進 10 個空格
         - name: tls
           mountPath: /etc/kong/tls
         ports:
