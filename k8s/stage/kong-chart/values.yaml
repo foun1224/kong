@@ -1,0 +1,31 @@
+namespace: stage-kong
+replicas: 3  # 多副本支持
+image:
+  repository: kong
+  tag: latest
+service:
+  type: LoadBalancer  # 暴露給外部
+kong:
+  database: "off"
+  declarativeConfig: "/kong/kong.yaml"
+  proxyListen: "0.0.0.0:8000, 0.0.0.0:8443 ssl"  # 支持 HTTP 和 HTTPS
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+probes:
+  liveness:
+    path: /status
+    port: 8001
+    scheme: HTTP
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readiness:
+    path: /status
+    port: 8001
+    scheme: HTTP
+    initialDelaySeconds: 5
+    periodSeconds: 10

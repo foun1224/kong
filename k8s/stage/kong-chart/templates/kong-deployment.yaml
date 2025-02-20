@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicas | default 1 }}
+  selector:
+    matchLabels:
+      app: kong
+  template:
+    metadata:
+      labels:
+        app: kong
+    spec:
+      containers:
+      - name: kong
+        image: {{ .Values.image.repository }}
+        env:
+        - name: KONG_DATABASE
+          value: {{ .Values.kong.database }}
+        - name: KONG_DECLARATIVE_CONFIG
+          value: {{ .Values.kong.declarativeConfig }}
+        - name: KONG_PROXY_LISTEN
+          value: {{ .Values.kong.proxyListen }}
+        resources: {{ toYaml .Values.resources | indent 4 }}
+        livenessProbe: {{ toYaml .Values.probes.liveness | indent 4 }}
+        readinessProbe: {{ toYaml .Values.probes.readiness | indent 4 }}
+        volumeMounts:
+        - name: config
+          mountPath: /kong
+        - name: tls
+          mountPath: /etc/kong/tls
+        ports:
+        - containerPort: 8000
+        - containerPort: 8443
+      volumes:
+      - name: config
+        configMap:
+          name: kong-config
+      - name: tls
+        secret:
+          secretName: kong-tls  # 假設已創建
