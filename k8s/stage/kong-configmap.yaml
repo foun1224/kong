@@ -8,7 +8,7 @@ data:
     _format_version: "3.0"
     services:
     - name: argocd-service
-      url: https://argocd-server.argocd.svc.cluster.local:80  # Argo CD 內部 HTTPS
+      url: http://argocd-server.argocd.svc.cluster.local:80  # Argo CD 內部 HTTPS
       routes:
       - name: argocd-route
         paths:
