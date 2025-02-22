@@ -11,6 +11,8 @@ data:
       url: http://argocd-server.argocd.svc.cluster.local:80  # Argo CD 內部 HTTPS
       routes:
       - name: argocd-route
+        hosts:
+        - argocd.example.com
         paths:
         - /argocd
         strip_path: true
