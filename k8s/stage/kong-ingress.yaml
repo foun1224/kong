@@ -8,14 +8,19 @@ metadata:
     # 可選：根據需求添加 Kong 插件
     konghq.com/strip-path: "true"        # 如果需要移除路徑前綴
 spec:
+  ingressClassName: kong
+  tls:
+    - host: 
+        - stage-www.bibian.co.jp             # 你的域名
+      secretName: kong-tls
   rules:
-  - host: stage-www.bibian.co.jp             # 你的域名
-    http: &backend
-      paths:
-      - path: /(.*)                    # 外部路徑，應與 Kong 配置中的 routes 匹配
-        pathType: Prefix
-        backend:
-          service:
-            name: kong-proxy            # Kong 的 Service 名稱
-            port:
-              number: 8000              # Kong 的代理端口
+    - host: stage-www.bibian.co.jp             # 你的域名
+      http: &backend
+        paths:
+        - path: /                    # 外部路徑，應與 Kong 配置中的 routes 匹配
+          pathType: Prefix
+          backend:
+            service:
+              name: kong-proxy            # Kong 的 Service 名稱
+              port:
+                number: 8000              # Kong 的代理端口
