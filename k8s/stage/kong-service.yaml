@@ -13,4 +13,4 @@ spec:
   - name: https
     port: 443
     targetPort: 8443
-  type: ClusterIP  # 不暴露給外部
+  type: LoadBalancer  # 暴露給外部
