@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-admin
+  namespace: stage-kong
+spec:
+  type: ClusterIP
+  selector:
+    app: kong  # 假設你的 Kong Pod 使用這個標籤
+  ports:
+  - name: admin
+    port: 8001
+    targetPort: 8001
+    protocol: TCP

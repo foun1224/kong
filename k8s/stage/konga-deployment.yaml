@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: konga
+  namespace: stage-kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: konga
+  template:
+    metadata:
+      labels:
+        app: konga
+    spec:
+      containers:
+      - name: konga
+        image: pantsel/konga:latest  # 官方 Konga 鏡像
+        ports:
+        - containerPort: 1337      # Konga 的默認端口
+        env:
+        - name: NODE_ENV
+          value: "production"      # 設置為 production 模式
+        - name: KONG_ADMIN_URL
+          value: "http://kong-admin.stage-kong.svc.cluster.local:8001"  # Kong 管理 API 的地址
