@@ -1,0 +1,67 @@
+# source : https://github.com/Kong/charts/blob/main/charts/kong/values.yaml
+# Default values for Kong's Helm Chart.
+ # Declare variables to be passed into your templates.
+ #
+ # Sections:
+ # - Deployment parameters
+ # - Kong parameters
+ # - Ingress Controller parameters
+ # - Postgres sub-chart parameters
+ # - Miscellaneous parameters
+ # - Kong Enterprise parameters
+ # -----------------------------------------------------------------------------
+ # Deployment parameters
+ # -----------------------------------------------------------------------------
+deployment:
+  kong:
+    enabled: true
+  serviceAccount:
+    create: true
+    automountServiceAccountToken: false
+proxy:
+  enabled: true
+  type: NodePort
+  loadBalancerClass:
+  nameOverride: ""
+  annotations: {}
+  labels:
+    enable-metrics: "true"
+  http:
+    enabled: true
+    servicePort: 80
+    containerPort: 8000
+    nodePort: 30080
+    parameters: []
+admin:
+  enabled: true
+  type: NodePort
+  http:
+    enabled: true
+    servicePort: 8001
+    containerPort: 8001
+    nodePort: 32071
+    parameters: [] 
+manager:
+  enabled: true
+  type: NodePort
+  loadBalancerClass:
+  annotations: {}
+  labels: {}
+  http:
+    enabled: true
+    servicePort: 8002
+    containerPort: 8002
+    nodePort: 32072
+    parameters: [] 
+
+userDefinedVolumes:
+  - name: "kong-config-vol"
+    configMap:
+      name: "kong-config"
+userDefinedVolumeMounts:
+  - name: "kong-config-vol"
+    mountPath: "/opt/kong/config"
+    
+env:
+  database: "off"
+  declarative_config: /opt/kong/config/kong.yml
