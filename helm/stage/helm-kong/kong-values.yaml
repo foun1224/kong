@@ -32,6 +32,13 @@ proxy:
     containerPort: 8000
     nodePort: 30080
     parameters: []
+  tls:
+    enabled: false
+    servicePort: 443
+    containerPort: 8443
+    nodePort: 32443
+    parameters:
+    - http2
 
 admin:
   enabled: true
@@ -42,6 +49,11 @@ admin:
     containerPort: 8001
     nodePort: 32071
     parameters: [] 
+
+  tls:
+   enabled: false
+   servicePort: 8444
+   containerPort: 8444
 
 manager:
   enabled: false
@@ -55,7 +67,12 @@ manager:
     containerPort: 8002
     nodePort: 32072
     parameters: [] 
-
+  tls:  
+    enabled: false
+    servicePort: 8445
+    containerPort: 8445
+    parameters:
+    - http2
 
     
 env:
