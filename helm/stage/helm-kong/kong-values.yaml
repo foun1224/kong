@@ -614,7 +614,7 @@ dblessConfig:
 # created in k8s. It uses CRDs for more fine grained control over routing and
 # for Kong specific configuration.
 ingressController:
-  enabled: true
+  enabled: false
   image:
     repository: kong/kubernetes-ingress-controller
     tag: "3.4"
@@ -667,7 +667,7 @@ ingressController:
 
   admissionWebhook:
     matchPolicy: Equivalent
-    enabled: true
+    enabled: false
     # Limit the `secrets.plugins.validation.ingress-controller.konghq.com` webhook
     # to only Secrets with the appropriate KIC "konghq.com/validate" label.
     filterSecrets: false
@@ -707,7 +707,7 @@ ingressController:
 
   rbac:
     # Specifies whether RBAC resources should be created
-    create: true
+    create: false
 
   # general properties
   livenessProbe:
@@ -1180,7 +1180,7 @@ enterprise:
 
 manager:
   # Enable creating a Kubernetes service for Kong Manager
-  enabled: false
+  enabled: true
   type: NodePort
   loadBalancerClass:
   # To specify annotations or labels for the Manager service, add them to the respective
@@ -1195,13 +1195,13 @@ manager:
     servicePort: 8002
     containerPort: 8002
     # Set a nodePort which is available if service type is NodePort
-    # nodePort: 32080
+    nodePort: 32080
     # Additional listen parameters, e.g. "reuseport", "backlog=16384"
     parameters: []
 
   tls:
     # Enable HTTPS listen for Kong Manager
-    enabled: true
+    enabled: false
     servicePort: 8445
     containerPort: 8445
     # Set a nodePort which is available if service type is NodePort
