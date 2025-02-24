@@ -303,7 +303,7 @@ kong:
       # Enable HTTPS listen for the status listen
       # Kong versions prior to 2.1 do not support TLS status listens.
       # This setting must remain false on those versions
-      enabled: false
+      enabled: true
       containerPort: 8543
       parameters: []
 
