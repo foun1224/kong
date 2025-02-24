@@ -246,7 +246,7 @@ kong:
       servicePort: 8001
       containerPort: 8001
       # Set a nodePort which is available if service type is NodePort
-      nodePort: 32080
+      nodePort: 32071
       # Additional listen parameters, e.g. "reuseport", "backlog=16384"
       parameters: []
 
