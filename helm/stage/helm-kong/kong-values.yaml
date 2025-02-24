@@ -292,7 +292,7 @@ kong:
   # Specify Kong status listener configuration
   # This listen is internal-only. It cannot be exposed through a service or ingress.
   status:
-    enabled: false
+    enabled: true
     http:
       # Enable plaintext HTTP listen for the status listen
       enabled: true
@@ -962,40 +962,40 @@ kong:
     #  memory: 2G
 
   # readinessProbe for Kong pods
-  # readinessProbe:
-  #   httpGet:
-  #     path: "/status/ready"
-  #     port: status
-  #     scheme: HTTP
-  #   initialDelaySeconds: 5
-  #   timeoutSeconds: 5
-  #   periodSeconds: 10
-  #   successThreshold: 1
-  #   failureThreshold: 3
+  readinessProbe:
+    httpGet:
+      path: "/status/ready"
+      port: status
+      scheme: HTTP
+    initialDelaySeconds: 5
+    timeoutSeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
 
   # livenessProbe for Kong pods
-  # livenessProbe:
-  #   httpGet:
-  #     path: "/status"
-  #     port: status
-  #     scheme: HTTP
-  #   initialDelaySeconds: 5
-  #   timeoutSeconds: 5
-  #   periodSeconds: 10
-  #   successThreshold: 1
-  #   failureThreshold: 3
+  livenessProbe:
+    httpGet:
+      path: "/status"
+      port: status
+      scheme: HTTP
+    initialDelaySeconds: 5
+    timeoutSeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
 
   # startupProbe for Kong pods
-  # startupProbe:
-  #   httpGet:
-  #     path: "/status"
-  #     port: status
-  #     scheme: HTTP
-  #   initialDelaySeconds: 5
-  #   timeoutSeconds: 5
-  #   periodSeconds: 2
-  #   successThreshold: 1
-  #   failureThreshold: 40
+  startupProbe:
+    httpGet:
+      path: "/status"
+      port: status
+      scheme: HTTP
+    initialDelaySeconds: 5
+    timeoutSeconds: 5
+    periodSeconds: 2
+    successThreshold: 1
+    failureThreshold: 40
 
   # Proxy container lifecycle hooks
   # Ref: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/
@@ -1042,7 +1042,9 @@ kong:
   replicaCount: 1
 
   # Annotations to be added to Kong deployment
-  deploymentAnnotations: {}
+  deploymentAnnotations: 
+    configmap.reloader.stakater.com/reload: "kong-config"
+  
 
   # Enable autoscaling using HorizontalPodAutoscaler
   # When configuring an HPA, you must set resource requests on all containers via
