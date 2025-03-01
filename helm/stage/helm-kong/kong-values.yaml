@@ -595,9 +595,9 @@ kong:
   # Kong's configuration for DB-less mode
   # Note: Use this section only if you are deploying Kong in DB-less mode
   # and not as an Ingress Controller.
-  #dblessConfig:
+  dblessConfig:
     #Either Kong's configuration is managed from an existing ConfigMap (with Key: kong.yml)
-    #configMap: "kong.yml" 
+    configMap: "kong-config" 
     # Or Kong's configuration is managed from an existing Secret (with Key: kong.yml)
     #secret: ""
     # Or the configuration is passed in full-text below
