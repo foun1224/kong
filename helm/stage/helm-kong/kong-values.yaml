@@ -134,11 +134,11 @@ kong:
     #   mountPath: "/opt/kong/config"
 
     userDefinedVolumes:
-      - name: "kong-custom-dbless-config-volume"  # 確保名稱唯一
+      - name: "kong-config-vol"  # 確保名稱唯一
         configMap:
           name: "kong-config"  # 引用現有的 ConfigMap
     userDefinedVolumeMounts:
-      - name: "kong-custom-dbless-config-volume"
+      - name: "kong-config-vol"
         mountPath: "/opt/kong/config"  # 掛載目錄
         subPath: "kong.yml"  # 指定 ConfigMap 的特定檔案
 
