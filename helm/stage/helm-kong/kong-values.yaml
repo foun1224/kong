@@ -129,9 +129,9 @@ kong:
     - name: "kong-custom-dbless-config-volume"
       configMap:
         name: "kong-config"
-    userDefinedVolumeMounts:
-    - name: "kong-custom-dbless-config-volume"
-      mountPath: "/opt/kong/config"
+    # userDefinedVolumeMounts:
+    # - name: "kong-custom-dbless-config-volume"
+    #   mountPath: "/opt/kong/config"
 
     test:
       # Enable creation of test resources for use with "helm test"
