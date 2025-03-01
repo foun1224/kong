@@ -134,12 +134,12 @@ kong:
     #   mountPath: "/opt/kong/config"
 
     userDefinedVolumes:
-      - name: "kong-config-vol"  # 確保名稱唯一
+      - name: "kong-config"  # 確保名稱唯一
         configMap:
           name: "kong-config"  # 引用現有的 ConfigMap
     userDefinedVolumeMounts:
-      - name: "kong-config-vol"
-        mountPath: "/kong/declarative"  # 掛載目錄
+      - name: "kong-config"
+        mountPath: "/kong"  # 掛載目錄
         #subPath: "kong.yml"  # 指定 ConfigMap 的特定檔案
 
 
@@ -179,7 +179,7 @@ kong:
   env:
     database: "off"
     #/kong/declarative/kong.yml
-    declarative_config: /kong/declarative/kong.yml #/opt/kong/config/kong.yml
+    declarative_config: /opt/kong/config/kong.yml #/kong/declarative/kong.yml #
     # the chart uses the traditional router (for Kong 3.x+) because the ingress
     # controller generates traditional routes. if you do not use the controller,
     # you may set this to "traditional_compatible" or "expressions" to use the new
@@ -595,9 +595,9 @@ kong:
   # Kong's configuration for DB-less mode
   # Note: Use this section only if you are deploying Kong in DB-less mode
   # and not as an Ingress Controller.
-  dblessConfig:
+  #dblessConfig:
     #Either Kong's configuration is managed from an existing ConfigMap (with Key: kong.yml)
-    configMap: "kong.yml" 
+    #configMap: "kong.yml" 
     # Or Kong's configuration is managed from an existing Secret (with Key: kong.yml)
     #secret: ""
     # Or the configuration is passed in full-text below
