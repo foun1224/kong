@@ -276,7 +276,7 @@ kong:
     # API of Kong outside the k8s cluster.
     ingress:
       # Enable/disable exposure using ingress.
-      enabled: true
+      enabled: false
       ingressClassName:
       # TLS secret name.
       # tls: kong-admin.example.com-tls
@@ -391,7 +391,7 @@ kong:
 
     tls:
       # Enable HTTPS listen for the proxy
-      enabled: false
+      enabled: true
       servicePort: 443
       containerPort: 8443
       # Set a target port for the TLS port in proxy service
@@ -584,9 +584,9 @@ kong:
   # Kong's configuration for DB-less mode
   # Note: Use this section only if you are deploying Kong in DB-less mode
   # and not as an Ingress Controller.
-  #dblessConfig:
+  dblessConfig:
     #Either Kong's configuration is managed from an existing ConfigMap (with Key: kong.yml)
-    #configMap: "kong.yml"
+    configMap: "kong.yml"
     # Or Kong's configuration is managed from an existing Secret (with Key: kong.yml)
     #secret: ""
     # Or the configuration is passed in full-text below
