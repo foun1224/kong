@@ -125,13 +125,23 @@ kong:
     # - name: "volumeName"
     #   mountPath: "/opt/user/dir/mount"
     
-    userDefinedVolumes:
-    - name: "kong-custom-dbless-config-volume"
-      configMap:
-        name: "kong-config"
+    # userDefinedVolumes:
+    # - name: "kong-custom-dbless-config-volume"
+    #   configMap:
+    #     name: "kong-config"
     # userDefinedVolumeMounts:
     # - name: "kong-custom-dbless-config-volume"
     #   mountPath: "/opt/kong/config"
+
+    userDefinedVolumes:
+      - name: "kong-custom-dbless-config-volume"  # 確保名稱唯一
+        configMap:
+          name: "kong-config"  # 引用現有的 ConfigMap
+    userDefinedVolumeMounts:
+      - name: "kong-custom-dbless-config-volume"
+        mountPath: "/opt/kong/config"  # 掛載目錄
+        subPath: "kong.yml"  # 指定 ConfigMap 的特定檔案
+
 
     test:
       # Enable creation of test resources for use with "helm test"
