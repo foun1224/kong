@@ -2,7 +2,7 @@ _format_version: "3.0"
 services:
 - name: argocd-service
   enabled: true
-  host: argocd-server.stage-argocd.svc.cluster.local
+  host: 10.2.23.121 #argocd-server.stage-argocd.svc.cluster.local
   path: /
   port: 80
   protocol: http
