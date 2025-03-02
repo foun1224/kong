@@ -195,6 +195,8 @@ kong:
     admin_gui_error_log: /dev/stderr
     portal_api_error_log: /dev/stderr
     prefix: /kong_prefix/
+    ssl_cert: /etc/secrets/kong-proxy-tls/tls.crt  # 指向證書文件
+    ssl_cert_key: /etc/secrets/kong-proxy-tls/tls.key  # 指向私鑰文件
 
   # This section is any customer specific environments variables that doesn't require KONG_ prefix.
   # These custom environment variables are typicall used in custom plugins or serverless plugins to
