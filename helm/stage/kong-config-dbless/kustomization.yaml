@@ -3,6 +3,6 @@ kind: Kustomization
 configMapGenerator:
 - name: kong-config # 對應到 kong-values.yaml 的 configMap name生成的 ConfigMap 名稱
   files:
-  - kong.yaml
+  - kong.yml
 generatorOptions:
  disableNameSuffixHash: true
