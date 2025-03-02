@@ -748,7 +748,7 @@ kong:
 
     rbac:
       # Specifies whether RBAC resources should be created
-      create: false
+      create: true
 
     # general properties
     livenessProbe:
