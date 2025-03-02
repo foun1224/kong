@@ -27,8 +27,8 @@ services:
 
 - name: stage-fe-hostmain-svc
   enabled: true
-  host: stage-host.bibian.co.jp #stage-fe-hostmain-svc.stage-fe-hostmain.svc.cluster.local #10.2.23.121 #argocd-server.stage-argocd.svc.cluster.local
-  path: /*
+  host: stage-fe-hostmain-svc.stage-fe-hostmain.svc.cluster.local #10.2.23.121 #argocd-server.stage-argocd.svc.cluster.local
+  path: /
   port: 80
   protocol: http
   connect_timeout: 60000 
@@ -39,8 +39,10 @@ services:
    - name: stage-host-route
      https_redirect_status_code: 426
      path_handling: v0
+     hosts:
+      - stage-host.bibian.co.jp
      paths:
-     - /*
+     - /
      preserve_host: true
      protocols:
      - http
@@ -48,4 +50,4 @@ services:
      regex_priority: 0
      request_buffering: false
      response_buffering: false
-     strip_path: true
+     strip_path: false
