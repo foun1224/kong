@@ -652,7 +652,7 @@ kong:
   # created in k8s. It uses CRDs for more fine grained control over routing and
   # for Kong specific configuration.
   ingressController:
-    enabled: true
+    enabled: false
     image:
       repository: kong/kubernetes-ingress-controller
       tag: "3.4"
@@ -1061,7 +1061,7 @@ kong:
   # When configuring an HPA, you must set resource requests on all containers via
   # "resources" and, if using the controller, "ingressController.resources" in values.yaml
   autoscaling:
-    enabled: false
+    enabled: true
     minReplicas: 2
     maxReplicas: 5
     annotations: {}
@@ -1075,7 +1075,7 @@ kong:
           name: cpu
           target:
             type: Utilization
-            averageUtilization: 80
+            averageUtilization: 50
 
   # Kong Pod Disruption Budget
   podDisruptionBudget:
