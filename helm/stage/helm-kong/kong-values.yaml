@@ -551,10 +551,10 @@ kong:
   # Be aware that the secret name will be used verbatim, and that certain types
   # of punctuation (e.g. `.`) can cause issues.
   # Example configuration
-  # secretVolumes:
-  # - kong-proxy-tls
+  secretVolumes:
+   - kong-proxy-tls
   # - kong-admin-tls
-  secretVolumes: []
+  #secretVolumes: []
 
   # Enable/disable migration jobs, and set annotations for them
   migrations:

@@ -24,3 +24,28 @@ services:
     request_buffering: false
     response_buffering: false
     strip_path: true
+
+# - name: argocd-service
+#   enabled: true
+#   host: 10.2.23.121 #argocd-server.stage-argocd.svc.cluster.local
+#   path: /
+#   port: 80
+#   protocol: http
+#   connect_timeout: 60000
+#   read_timeout: 60000
+#   write_timeout: 60000
+#   retries: 5
+#   routes:
+#   - name: argocd-route
+#     https_redirect_status_code: 426
+#     path_handling: v0
+#     paths:
+#     - /argocd
+#     preserve_host: true
+#     protocols:
+#     - http
+#     - https
+#     regex_priority: 0
+#     request_buffering: false
+#     response_buffering: false
+#     strip_path: true
