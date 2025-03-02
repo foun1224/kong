@@ -139,7 +139,7 @@ kong:
           name: "kong-config"  # 引用現有的 ConfigMap
     userDefinedVolumeMounts:
       - name: "kong-config"
-        mountPath: "/kong"  # 掛載目錄
+        mountPath: "/opt/kong/config"  # 掛載目錄
         #subPath: "kong.yml"  # 指定 ConfigMap 的特定檔案
 
 
@@ -597,7 +597,7 @@ kong:
   # and not as an Ingress Controller.
   dblessConfig:
     #Either Kong's configuration is managed from an existing ConfigMap (with Key: kong.yml)
-    #configMap: "kong-config" 
+    configMap: "kong.yml" 
     # Or Kong's configuration is managed from an existing Secret (with Key: kong.yml)
     #secret: ""
     # Or the configuration is passed in full-text below
