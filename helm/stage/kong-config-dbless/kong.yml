@@ -51,3 +51,30 @@ services:
      request_buffering: false
      response_buffering: false
      strip_path: false
+
+- name: stage-fe-auth-svc
+  enabled: true
+  host: stage-fe-auth-svc.stage-fe-auth.svc.cluster.local #10.2.23.121 #argocd-server.stage-argocd.svc.cluster.local
+  path: /
+  port: 80
+  protocol: http
+  connect_timeout: 60000 
+  read_timeout: 60000
+  write_timeout: 60000
+  retries: 5
+  routes:
+   - name: stage-auth-route
+     https_redirect_status_code: 426
+     path_handling: v0
+     hosts:
+      - stage-auth.bibian.co.jp
+     paths:
+     - /
+     preserve_host: true
+     protocols:
+     - http
+     - https
+     regex_priority: 0
+     request_buffering: false
+     response_buffering: false
+     strip_path: false
